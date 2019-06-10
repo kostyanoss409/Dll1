@@ -4,7 +4,6 @@
 using namespace std;
 int main()
 {
-
 	double x, Val, xnorm;
 	char sw, save;
 	bool resr;
