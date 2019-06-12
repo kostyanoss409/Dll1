@@ -12,7 +12,7 @@ extern "C" _declspec(dllexport)
 double Val(double x)
 {
 	srand(time(0));
-	double	y = rand() % 1000;
+	double	y = rand() % 10;
 	return y;
 }
 extern "C" _declspec(dllexport)

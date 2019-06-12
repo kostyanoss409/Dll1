@@ -13,34 +13,42 @@ int main()
 	HINSTANCE hmodule = NULL;
 	hmodule = LoadLibrary(L"Dll1.dll");
 	if (hmodule == NULL) { cout << "No" << endl; }
-	else { cout << "File or Input ? " << endl; }
-	typedef double(*Value)(double x);
-	Value Valfunc = (Value)GetProcAddress(hmodule, "Val");
-	typedef bool(*CheckRand)(double Val, double x);
-	CheckRand checkr = (CheckRand)GetProcAddress(hmodule, "ccout");
-	typedef long(*Fact)(long x);
-	Fact fact = (Fact)GetProcAddress(hmodule, "factorial");
+	else { cout << "File or Input ? " << endl; }	
 	typedef bool(*CheckFact)(double val, long fact);
 	CheckFact checkf = (CheckFact)GetProcAddress(hmodule, "ccheck");
+	typedef bool(*CheckRand)(double Val, double x);
+	CheckRand checkr = (CheckRand)GetProcAddress(hmodule, "ccout");
 	cin >> sw;
 	switch (sw)
 	{
 	case 'f':
-		fin.read((char*)&x, sizeof(x));
+	{
+		/*fin.read((char*)&x, sizeof(x));
 		cout << "X is " << x << endl;
 		Val = Valfunc(x);
 		factval = fact(x);
 		cout << "Rand is " << Val << endl;
-		resr = checkr(Val, x);
+		resr = checkr(Val, x);*/
+		typedef long(*Fact)(long x);
+		Fact fact = (Fact)GetProcAddress(hmodule, "factorial");
+		cout << "X is ";
+		cin >> x;
+		factval = fact(x);
+		cout << "Rand is " << factval << endl;
+		resr = checkr(x, factval);
 		break;
+	}
 	case 'i':
+	{
+		typedef double(*Value)(double x);
+		Value Valfunc = (Value)GetProcAddress(hmodule, "Val");
 		cout << "X is ";
 		cin >> x;
 		Val = Valfunc(x);
-		factval = fact(x);
 		cout << "Rand is " << Val << endl;
 		resr = checkr(Val, x);
 		break;
+	}
 	default:
 		cout << "No" << endl;
 		break;
